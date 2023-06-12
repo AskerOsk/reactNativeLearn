@@ -25,6 +25,7 @@ const PostData = styled.Text`
   margin-top: 2px;
 `;
 const PostDetails = styled.View`
+  flex: 1;
   justify-content: center;
 `;
 

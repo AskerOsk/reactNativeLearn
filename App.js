@@ -12,15 +12,15 @@ const MyStatusBar = styled.View`
 
 export default function App() {
 
-  const [char, setChar] = React.useState();
+  const [char, setChar] = React.useState([]);
 
   React.useEffect(() =>{
     
-    axios
-      .get('https://gateway.marvel.com:443/v1/public/characters?limit=10&apikey=6abcc4a90c6bc6f858994773e26ac8eb')
-      .then(({data}) =>{
-        setChar(data)
-        Alert.alert("Ответ", 'Получил данные!!')
+    axios.get('https://6486b810beba6297278f129a.mockapi.io/posts')  //// https://jsonplaceholder.typicode.com/posts
+      .then(({ data }) =>{
+        setChar(data);
+        // Alert.alert("Ответ", 'Получил данные!!')
+        console.log(char);
 
       })
       .catch(err =>{
@@ -29,18 +29,15 @@ export default function App() {
       });
   }, [])
 
+
   return (
     <View>
       <MyStatusBar />
+      {char.map((obj) =>{
+         return <Post key={obj.id} title={obj.name} imageUrl={obj.avatar} createAt={obj.createdAt}/>
+      })}
       <StatusBar theme="auto"/>
-        {
-        char.map(obj =>{ 
-            <Post 
-            title='Test Работы' 
-            imageUrl="https://s1.1zoom.ru/b5050/243/Big_cats_Leopards_Snout_479812_1920x1200.jpg" 
-            createAt='11.06.2023 17:53'/>
-         })
-        }
+      <Text>Работает</Text>
     </View>
   );
 }
